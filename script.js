@@ -18,4 +18,25 @@ const divide = function(a, b) {
     } else return a / b;
 }
 
-console.log(divide(0, 3))
+//operate function
+
+const operate = function(operator, a, b) {
+    switch(operator) {
+        case "+":
+            return add(a, b);
+
+        case "-":
+            return subtract(a, b);
+
+        case "*":
+            return multiply(a, b);
+
+        case "/":
+            return divide(a, b);
+
+        default:
+            return "error";
+    }
+}
+
+console.log(operate("^", 0, 5));
