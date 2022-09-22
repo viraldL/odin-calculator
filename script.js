@@ -58,7 +58,7 @@ clear.addEventListener("click", clearScreen);
 del.addEventListener("click", delScreen);
 
 function clearScreen() {
-    screen.innerText = "";
+    screen.innerText = 0;
     displayValue = Number(screen.innerText);
     displayValue = 0;
     firstValue = 0;
@@ -67,7 +67,7 @@ function clearScreen() {
 
 function delScreen() {
     if(screen.innerText.length == 1){
-        screen.innerText = "";
+        screen.innerText = 0;
         displayValue = Number(screen.innerText);
     } else {
         let text = screen.innerText;
@@ -76,12 +76,32 @@ function delScreen() {
     }
 }
 
+function hitEnter() {
+    secondValue = displayValue;
+    if(!prevOperator){
+        screen.innerText = displayValue;
+    } else {
+    screen.innerText = operate(prevOperator, firstValue, displayValue);
+    displayValue = Number(screen.innerText)
+    firstValue = displayValue;
+    secondValue = 0;
+    clickedOperator = "";
+    }
+}
+
 
 
 numbersBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {   
-        screen.innerText += e.target.innerText;
-        displayValue = Number(screen.innerText);
+        if(screen.innerText == 0) {
+            screen.innerText = "";
+            screen.innerText += e.target.innerText;
+            displayValue = Number(screen.innerText);
+        } else {
+            screen.innerText += e.target.innerText;
+            displayValue = Number(screen.innerText);
+        }
+
     })
 })
 
@@ -93,28 +113,25 @@ operatorsBtn.forEach(btn => {
             displayValue = 0;
         } else {
             clickedOperator = e.target.innerText;
+            if(firstValue == displayValue) {
+                prevOperator = e.target.innerText;
+                firstValue = displayValue;
+                displayValue = 0;
+            } else {
             firstValue = operate(prevOperator, firstValue, displayValue);
             prevOperator = clickedOperator;
             displayValue = 0;
+            }
         }
-        screen.innerText = "";
+        screen.innerText = 0;
     })
 })
 
-enter.addEventListener("click", (e) => {
-    secondValue = displayValue;
-    if(!clickedOperator){
-        screen.innerText = displayValue;
-    } else {
-    screen.innerText = operate(clickedOperator, firstValue, secondValue);
-    displayValue = Number(screen.innerText)
-    clickedOperator = "";
-    }
-})
+enter.addEventListener("click", hitEnter)
 
 
 window.onload = function() {
-    screen.innerText = "";
+    screen.innerText = 0;
 }
 window.onclick = () => {
     console.log(displayValue, firstValue, secondValue);
