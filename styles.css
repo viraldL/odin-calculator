@@ -97,7 +97,7 @@ main {
 #zero {grid-area: 5 / 2 / 6 / 3;}
 
 /* operators */
-#point { grid-area: 5 / 1 / 6 / 2; background-color: rgba(163, 163, 163, 0.1);}
+#dot { grid-area: 5 / 1 / 6 / 2; background-color: rgba(163, 163, 163, 0.1);}
 #enter { grid-area: 5 / 4 / 6 / 6; background-color: rgba(92, 92, 92, 0.1);}
 #plus { grid-area: 4 / 4 / 5 / 5; background-color: rgba(163, 163, 163, 0.1);}
 #minus { grid-area: 4 / 5 / 5 / 6; background-color: rgba(163, 163, 163, 0.1);}

@@ -47,6 +47,7 @@ const screen = document.querySelector("#screen")
 const del = document.querySelector("#del");
 const clear = document.querySelector("#clear");
 const enter = document.querySelector("#enter");
+const dot = document.querySelector("#dot");
 
 let displayValue = 0;
 let firstValue = 0;
@@ -57,6 +58,13 @@ let prevOperator = "";
 clear.addEventListener("click", clearScreen);
 del.addEventListener("click", delScreen);
 enter.addEventListener("click", hitEnter)
+dot.addEventListener("click", addDot)
+
+function addDot() {
+    if(!screen.innerText.includes(".")){
+        screen.innerText += ".";
+    }
+}
 
 function clearScreen() {
     screen.innerText = 0;
@@ -114,7 +122,7 @@ function updateScreen() {
 numbersBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
         updateScreen()
-        if(screen.innerText == 0 || screen.innerText == "What?") {
+        if(screen.innerText === "0" || screen.innerText == "What?") {
             screen.innerText = "";
             screen.innerText += e.target.innerText;
             displayValue = Number(screen.innerText);
@@ -142,7 +150,7 @@ operatorsBtn.forEach(btn => {
                 if(firstValue === undefined || firstValue === NaN){
                     firstValue = 0;
                 }
-                
+
                 prevOperator = clickedOperator;
                 displayValue = 0;
             }
