@@ -14,7 +14,7 @@ const multiply = function(a, b) {
 
 const divide = function(a, b) {
     if(a == 0 || b == 0){
-        return "oops error!"
+        return "What?";
     } else return a / b;
 }
 
@@ -78,18 +78,28 @@ function delScreen() {
 }
 
 function hitEnter() {
-    secondValue = displayValue;
-    if(!prevOperator){
-        screen.innerText = displayValue;
-    } else {
-    screen.innerText = operate(prevOperator, firstValue, displayValue);
-    Number(screen.innerText)
-    displayValue = Number(screen.innerText);
-    firstValue = displayValue;
-    secondValue = 0;
-    clickedOperator = "";
-    updateScreen()
-    }
+
+        secondValue = displayValue;
+        if(!prevOperator){
+            screen.innerText = displayValue;
+        } else {
+            screen.innerText = operate(prevOperator, firstValue, displayValue);
+            console.log("es:" + operate(prevOperator, firstValue, displayValue));
+            if(screen.innerText == "What?"){
+                displayValue = 0;
+                firstValue = displayValue;
+                secondValue = 0;
+                clickedOperator = "";
+            } else {
+                displayValue = Number(screen.innerText);
+                firstValue = displayValue;
+                secondValue = 0;
+                clickedOperator = "";
+            }
+            updateScreen()
+        }
+
+
 }
 
 function updateScreen() {
@@ -104,17 +114,14 @@ function updateScreen() {
 numbersBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
         updateScreen()
-        if(screen.innerText == 0) {
+        if(screen.innerText == 0 || screen.innerText == "What?") {
             screen.innerText = "";
             screen.innerText += e.target.innerText;
             displayValue = Number(screen.innerText);
-
         } else {
             screen.innerText += e.target.innerText;
             displayValue = Number(screen.innerText);
-
         }
-
     })
 })
 
@@ -132,6 +139,10 @@ operatorsBtn.forEach(btn => {
                 displayValue = 0;
             } else {
                 firstValue = operate(prevOperator, firstValue, displayValue);
+                if(firstValue === undefined || firstValue === NaN){
+                    firstValue = 0;
+                }
+                
                 prevOperator = clickedOperator;
                 displayValue = 0;
             }
