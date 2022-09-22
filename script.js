@@ -52,6 +52,7 @@ let displayValue = 0;
 let firstValue = 0;
 let secondValue = 0;
 let clickedOperator = "";
+let prevOperator = "";
 
 clear.addEventListener("click", clearScreen);
 del.addEventListener("click", delScreen);
@@ -75,9 +76,7 @@ function delScreen() {
     }
 }
 
-function showMath() {
 
-}
 
 numbersBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {   
@@ -88,12 +87,14 @@ numbersBtn.forEach(btn => {
 
 operatorsBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
-        clickedOperator = e.target.innerText;
         if(firstValue == 0) {
+            prevOperator = e.target.innerText;
             firstValue = displayValue;
             displayValue = 0;
         } else {
-            firstValue = operate(clickedOperator, firstValue, displayValue);
+            clickedOperator = e.target.innerText;
+            firstValue = operate(prevOperator, firstValue, displayValue);
+            prevOperator = clickedOperator;
             displayValue = 0;
         }
         screen.innerText = "";
