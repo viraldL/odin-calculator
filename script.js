@@ -159,7 +159,34 @@ operatorsBtn.forEach(btn => {
     })
 })
 
+window.addEventListener("keydown", (e) => {
 
+    numbersBtn.forEach(btn => {
+       if(e.key === btn.dataset.key){
+        btn.click();
+       }
+    })
+
+    operatorsBtn.forEach(btn => {
+        if(e.key === btn.dataset.key){
+            btn.click();
+        }
+    })
+
+    if(e.key === enter.dataset.key){
+        enter.click();
+    }
+
+    if(e.key === dot.dataset.key){
+        dot.click();
+    }
+
+    if(e.key === del.dataset.key){
+        del.click();
+    }
+
+    console.log(e)
+})
 
 window.onload = function() {
     screen.innerText = 0;
