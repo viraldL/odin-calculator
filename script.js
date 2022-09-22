@@ -56,6 +56,7 @@ let prevOperator = "";
 
 clear.addEventListener("click", clearScreen);
 del.addEventListener("click", delScreen);
+enter.addEventListener("click", hitEnter)
 
 function clearScreen() {
     screen.innerText = 0;
@@ -82,24 +83,36 @@ function hitEnter() {
         screen.innerText = displayValue;
     } else {
     screen.innerText = operate(prevOperator, firstValue, displayValue);
-    displayValue = Number(screen.innerText)
+    Number(screen.innerText)
+    displayValue = Number(screen.innerText);
     firstValue = displayValue;
     secondValue = 0;
     clickedOperator = "";
+    updateScreen()
+    }
+}
+
+function updateScreen() {
+    if(screen.innerText.length > 13) {
+        screen.innerText = screen.innerText.substring(0, 13);
     }
 }
 
 
 
+
 numbersBtn.forEach(btn => {
-    btn.addEventListener("click", (e) => {   
+    btn.addEventListener("click", (e) => {
+        updateScreen()
         if(screen.innerText == 0) {
             screen.innerText = "";
             screen.innerText += e.target.innerText;
             displayValue = Number(screen.innerText);
+
         } else {
             screen.innerText += e.target.innerText;
             displayValue = Number(screen.innerText);
+
         }
 
     })
@@ -118,16 +131,15 @@ operatorsBtn.forEach(btn => {
                 firstValue = displayValue;
                 displayValue = 0;
             } else {
-            firstValue = operate(prevOperator, firstValue, displayValue);
-            prevOperator = clickedOperator;
-            displayValue = 0;
+                firstValue = operate(prevOperator, firstValue, displayValue);
+                prevOperator = clickedOperator;
+                displayValue = 0;
             }
         }
         screen.innerText = 0;
     })
 })
 
-enter.addEventListener("click", hitEnter)
 
 
 window.onload = function() {
