@@ -1,5 +1,4 @@
 //main functions
-
 const add = function(a, b) {
     return a + b;
 }
@@ -19,7 +18,6 @@ const divide = function(a, b) {
 }
 
 //operate function
-
 const operate = function(operator, a, b) {
     switch(operator) {
         case "+":
@@ -49,6 +47,7 @@ const clear = document.querySelector("#clear");
 const enter = document.querySelector("#enter");
 const dot = document.querySelector("#dot");
 
+//variables
 let displayValue = 0;
 let firstValue = 0;
 let secondValue = 0;
@@ -60,6 +59,7 @@ del.addEventListener("click", delScreen);
 enter.addEventListener("click", hitEnter)
 dot.addEventListener("click", addDot)
 
+//functions
 function addDot() {
     if(!screen.innerText.includes(".")){
         screen.innerText += ".";
@@ -86,7 +86,6 @@ function delScreen() {
 }
 
 function hitEnter() {
-
         secondValue = displayValue;
         if(!prevOperator){
             screen.innerText = displayValue;
@@ -106,8 +105,6 @@ function hitEnter() {
             }
             updateScreen()
         }
-
-
 }
 
 function updateScreen() {
@@ -117,8 +114,7 @@ function updateScreen() {
 }
 
 
-
-
+//number buttons handling
 numbersBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
         updateScreen()
@@ -133,6 +129,7 @@ numbersBtn.forEach(btn => {
     })
 })
 
+//operator buttons handling
 operatorsBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
         if(firstValue == 0) {
@@ -159,35 +156,30 @@ operatorsBtn.forEach(btn => {
     })
 })
 
+//keyboard support
 window.addEventListener("keydown", (e) => {
-
     numbersBtn.forEach(btn => {
        if(e.key === btn.dataset.key){
         btn.click();
        }
     })
-
     operatorsBtn.forEach(btn => {
         if(e.key === btn.dataset.key){
             btn.click();
         }
     })
-
     if(e.key === enter.dataset.key){
         enter.click();
     }
-
     if(e.key === dot.dataset.key){
         dot.click();
     }
-
     if(e.key === del.dataset.key){
         del.click();
     }
-
-    console.log(e)
 })
 
+//reset on load
 window.onload = function() {
     screen.innerText = 0;
 }
