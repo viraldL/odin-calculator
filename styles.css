@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;500;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier Prime', monospace;
+    font-family: 'Inter Tight', sans-serif;
 }
 
 body {
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient(180deg , rgba(255,255,255,1), rgba(0,0,0,0.3));
+    background-color: rgb(245, 242, 243);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,7 +30,7 @@ h1 {
 
 main {
     width: 70%;
-    height: 60%;
+    height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,28 +41,28 @@ main {
     width: 300px;
     max-height: 80%;
     height: 80%;
-    background-color: white;
+    background-color: #f9f9f9;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 10px;
-    border-radius: 10px;
-    box-shadow: 5px 10px 10px rgba(0,0,0,0.3);
+    border-radius: 30px;
+    box-shadow: 5px 10px 10px rgba(0,0,0,0.2);
 }
 
 #screenBox {
     width: 100%;
     height: 25%;
-    background-color: rgba(0,0,0,0.1);
-    border: 2px solid rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    color: #292d36;
 }
 
 #screenDown {
     font-size: 2em;
+    font-weight: 800;
     display: flex;
     align-items: end;
     justify-content: end;
@@ -88,19 +88,29 @@ main {
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    color: #292d36;
 
 }
 
 #buttons span {
-    border: 1px solid rgba(0,0,0,0.1);
+    background-color: #f7f7f7;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 3px;
+
 }
 
 #buttons span:hover {
-    background-color: rgba(0,0,0,0.1);
+    filter: brightness(0.98);
 }
+
+.operator, #radical, #percentage, #power, #factorial {
+    color: #ee9577;
+    background-color: rgba(238, 149, 119,0.1) !important;
+}
+
 
 /* numbers  */
 #one {grid-area: 4 / 1 / 5 / 2;}
@@ -115,10 +125,10 @@ main {
 #zero {grid-area: 5 / 2 / 6 / 3;}
 
 /* operators */
-#del {grid-area: 1 / 4 / 2 / 6;}
-#clear {grid-area: 1 / 1 / 2 / 2; background-color: rgba(163, 163, 163, 0.1);}
+#del {grid-area: 1 / 4 / 2 / 6; color: #ee7878; background-color: rgba(238, 120, 120,0.1) !important;}
+#clear {grid-area: 1 / 1 / 2 / 2; background-color: rgba(163, 163, 163, 0.1); color: #ee7878; background-color: rgba(238, 120, 120,0.1) !important;}
 #dot { grid-area: 5 / 1 / 6 / 2; background-color: rgba(163, 163, 163, 0.1);}
-#enter { grid-area: 5 / 4 / 6 / 6; background-color: rgba(92, 92, 92, 0.1);}
+#enter { grid-area: 5 / 4 / 6 / 6; background-color:rgba(149, 119, 238, 0.1) !important; color: #b377ee;}
 #plus { grid-area: 4 / 4 / 5 / 5; background-color: rgba(163, 163, 163, 0.1);}
 #minus { grid-area: 4 / 5 / 5 / 6; background-color: rgba(163, 163, 163, 0.1);}
 #multiple { grid-area: 3 / 4 / 4 / 5; background-color: rgba(163, 163, 163, 0.1);}

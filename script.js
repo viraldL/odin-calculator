@@ -91,13 +91,11 @@ function clearScreen() {
 function delScreen() {
     if(screen.innerText.length == 1){
         screen.innerText = 0;
-        screenUp.innerText = 0;
         getDisplayValue();
     } else {
         let text = screen.innerText;
         let text2 = screenUp.innerText;
         screen.innerText = text.substr(0, text.length - 1);
-        screenUp.innerText = text2.substr(0, text.length - 1);
         getDisplayValue();
     }
 }
