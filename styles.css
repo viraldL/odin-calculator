@@ -50,7 +50,7 @@ main {
     box-shadow: 5px 10px 10px rgba(0,0,0,0.3);
 }
 
-#screen {
+#screenBox {
     width: 100%;
     height: 25%;
     background-color: rgba(0,0,0,0.1);
@@ -104,6 +104,9 @@ main {
 #multiple { grid-area: 3 / 4 / 4 / 5; background-color: rgba(163, 163, 163, 0.1);}
 #divide { grid-area: 3 / 5 / 4 / 6; background-color: rgba(163, 163, 163, 0.1);}
 #placeholder {background-color: rgba(163, 163, 163, 0.1);}
+#plusMinus {background-color: rgba(163, 163, 163, 0.1);}
+#percentage {background-color: rgba(163, 163, 163, 0.1);}
+#radical {background-color: rgba(163, 163, 163, 0.1);}
 
 footer {
     position: fixed;

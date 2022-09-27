@@ -41,11 +41,14 @@ const operate = function(operator, a, b) {
 const operatorArray = ["+", "-", "x", "/"];
 const numbersBtn = document.querySelectorAll(".number");
 const operatorsBtn = document.querySelectorAll(".operator"); 
-const screen = document.querySelector("#screen")
+const screen = document.querySelector("#screenDown")
 const del = document.querySelector("#del");
 const clear = document.querySelector("#clear");
 const enter = document.querySelector("#enter");
 const dot = document.querySelector("#dot");
+const plusMinus = document.querySelector("#plusMinus");
+const percentage = document.querySelector("#percentage");
+const radical = document.querySelector("#radical");
 
 //variables
 let displayValue = 0;
@@ -56,8 +59,11 @@ let prevOperator = "";
 
 clear.addEventListener("click", clearScreen);
 del.addEventListener("click", delScreen);
-enter.addEventListener("click", hitEnter)
-dot.addEventListener("click", addDot)
+enter.addEventListener("click", hitEnter);
+dot.addEventListener("click", addDot);
+plusMinus.addEventListener("click", changePlusMinus)
+percentage.addEventListener("click", addPercentage)
+radical.addEventListener("click", squareRoot)
 
 //functions
 function addDot() {
@@ -85,13 +91,29 @@ function delScreen() {
     }
 }
 
+function changePlusMinus() {
+    screen.innerText *= -1;
+    displayValue = Number(screen.innerText);
+}
+
+function addPercentage() {
+    screen.innerText /= 100;
+    displayValue = Number(screen.innerText);
+    updateScreen();
+}
+
+function squareRoot() {
+    screen.innerText = Math.sqrt(Number(screen.innerText));
+    displayValue = Number(screen.innerText);
+    updateScreen();
+}
+
 function hitEnter() {
         secondValue = displayValue;
         if(!prevOperator){
             screen.innerText = displayValue;
         } else {
             screen.innerText = operate(prevOperator, firstValue, displayValue);
-            console.log("es:" + operate(prevOperator, firstValue, displayValue));
             if(screen.innerText == "What?"){
                 displayValue = 0;
                 firstValue = displayValue;
@@ -144,8 +166,9 @@ operatorsBtn.forEach(btn => {
                 displayValue = 0;
             } else {
                 firstValue = operate(prevOperator, firstValue, displayValue);
-                if(firstValue === undefined || firstValue === NaN){
+                if(typeof firstValue != "number"){
                     firstValue = 0;
+                    displayValue = "error";
                 }
 
                 prevOperator = clickedOperator;
@@ -187,3 +210,4 @@ window.onclick = () => {
     console.log(displayValue, firstValue, secondValue);
 }
 
+//!!!!FIX DZIELENIE PRZEZ 0 I NASTEPNE OPERACJE!!!!!!!
