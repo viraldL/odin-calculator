@@ -107,6 +107,7 @@ main {
 #plusMinus {background-color: rgba(163, 163, 163, 0.1);}
 #percentage {background-color: rgba(163, 163, 163, 0.1);}
 #radical {background-color: rgba(163, 163, 163, 0.1);}
+#power {background-color: rgba(163, 163, 163, 0.1);}
 
 footer {
     position: fixed;

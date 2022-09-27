@@ -49,6 +49,7 @@ const dot = document.querySelector("#dot");
 const plusMinus = document.querySelector("#plusMinus");
 const percentage = document.querySelector("#percentage");
 const radical = document.querySelector("#radical");
+const power = document.querySelector("#power");
 
 //variables
 let displayValue = 0;
@@ -61,9 +62,10 @@ clear.addEventListener("click", clearScreen);
 del.addEventListener("click", delScreen);
 enter.addEventListener("click", hitEnter);
 dot.addEventListener("click", addDot);
-plusMinus.addEventListener("click", changePlusMinus)
-percentage.addEventListener("click", addPercentage)
-radical.addEventListener("click", squareRoot)
+plusMinus.addEventListener("click", changePlusMinus);
+percentage.addEventListener("click", addPercentage);
+radical.addEventListener("click", squareRoot);
+power.addEventListener("click", powerOfTwo);
 
 //functions
 function addDot() {
@@ -104,6 +106,12 @@ function addPercentage() {
 
 function squareRoot() {
     screen.innerText = Math.sqrt(Number(screen.innerText));
+    displayValue = Number(screen.innerText);
+    updateScreen();
+}
+
+function powerOfTwo() {
+    screen.innerText = Math.pow(Number(screen.innerText), 2);
     displayValue = Number(screen.innerText);
     updateScreen();
 }
