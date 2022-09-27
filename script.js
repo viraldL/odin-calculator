@@ -37,8 +37,7 @@ const operate = function(operator, a, b) {
     }
 }
 
-//buttons
-const operatorArray = ["+", "-", "x", "/"];
+//querySelectors
 const numbersBtn = document.querySelectorAll(".number");
 const operatorsBtn = document.querySelectorAll(".operator"); 
 const screen = document.querySelector("#screenDown")
@@ -60,6 +59,7 @@ let secondValue = 0;
 let clickedOperator = "";
 let prevOperator = "";
 
+//btns
 clear.addEventListener("click", clearScreen);
 del.addEventListener("click", delScreen);
 enter.addEventListener("click", hitEnter);
@@ -105,6 +105,7 @@ function delScreen() {
 function changePlusMinus() {
     screen.innerText *= -1;
     getDisplayValue();
+    updateScreen();
 }
 
 function addPercentage() {
@@ -121,14 +122,14 @@ function squareRoot() {
 
 function powerOfTwo() {
     screen.innerText = Math.pow(Number(screen.innerText), 2);
-    getDisplayValue()
+    getDisplayValue();
     updateScreen();
 }
 
 function factorialOf() {
     let num = Number(screen.innerText);
     if(num > 15){
-        alert("max factorial 15 cause of big lags")
+        alert("max factorial 15 cause of big lags");
         screen.innerText = 0;
         getDisplayValue();
         updateScreen();
@@ -153,34 +154,31 @@ function hitEnter() {
     if(screen.innerText == "What?") {
         clearScreen();
     }
-        secondValue = displayValue;
-        if(!prevOperator){
-            screen.innerText = displayValue;
+    secondValue = displayValue;
+    if(!prevOperator){
+        screen.innerText = displayValue;
+    } else {
+        screen.innerText = operate(prevOperator, firstValue, displayValue);
+        updateUpScreen(displayValue);
+        screenUp.innerHTML += ` ${prevOperator}&nbsp;`;
+        if(screen.innerText == "What?"){
+            displayValue = 0;
+            firstValue = displayValue;
+            secondValue = 0;
+            clickedOperator = "";
         } else {
-            screen.innerText = operate(prevOperator, firstValue, displayValue);
-            updateUpScreen(displayValue)
-            screenUp.innerHTML += ` ${prevOperator}&nbsp;`;
-            if(screen.innerText == "What?"){
-                displayValue = 0;
-                firstValue = displayValue;
-                secondValue = 0;
-                clickedOperator = "";
-            } else {
-                getDisplayValue();
-                firstValue = displayValue;
-                secondValue = 0;
-                clickedOperator = "";
-            }
-            updateScreen()
+            getDisplayValue();
+            firstValue = displayValue;
+            secondValue = 0;
+            clickedOperator = "";
         }
+        updateScreen();
+    }
 }
-
-
 
 function updateScreen() {
     if(screen.innerText.length > 13) {
-        screen.innerText = screen.innerText.substring(0, 13);      
-
+        screen.innerText = screen.innerText.substring(0, 13);
     }
 }
 
@@ -192,15 +190,12 @@ function getDisplayValue() {
     displayValue = Number(screen.innerText);
 }
 
-
-
 //number buttons handling
 numbersBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
         if(screen.innerText == "What?") {
             clearScreen();
         }
-
         updateScreen()
         if(screen.innerText === "0" || screen.innerText == "What?") {
             screen.innerText = "";
@@ -219,7 +214,6 @@ operatorsBtn.forEach(btn => {
         if(screen.innerText == "What?") {
             clearScreen();
         }
-
         if(firstValue == 0) {
             prevOperator = e.target.innerText;
             firstValue = displayValue;
@@ -271,14 +265,23 @@ window.addEventListener("keydown", (e) => {
     if(e.key === del.dataset.key){
         del.click();
     }
+    if(e.key === factorial.dataset.key){
+        factorial.click();
+    }
+    if(e.key === percentage.dataset.key){
+        percentage.click();
+    }
+    if(e.key === power.dataset.key){
+        power.click();
+    }
 })
 
 //reset on load
 window.onload = function() {
     clearScreen()
 }
-window.onclick = () => {
-    console.log(displayValue, firstValue, secondValue);
-}
 
-//!!!!FIX DZIELENIE PRZEZ 0 I NASTEPNE OPERACJE!!!!!!!
+// window.onclick = () => {
+//     console.log(displayValue, firstValue, secondValue);
+// }
+
