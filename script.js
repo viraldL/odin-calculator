@@ -50,6 +50,7 @@ const plusMinus = document.querySelector("#plusMinus");
 const percentage = document.querySelector("#percentage");
 const radical = document.querySelector("#radical");
 const power = document.querySelector("#power");
+const factorial = document.querySelector("#factorial");
 
 //variables
 let displayValue = 0;
@@ -66,6 +67,7 @@ plusMinus.addEventListener("click", changePlusMinus);
 percentage.addEventListener("click", addPercentage);
 radical.addEventListener("click", squareRoot);
 power.addEventListener("click", powerOfTwo);
+factorial.addEventListener("click", factorialOf);
 
 //functions
 function addDot() {
@@ -114,6 +116,23 @@ function powerOfTwo() {
     screen.innerText = Math.pow(Number(screen.innerText), 2);
     displayValue = Number(screen.innerText);
     updateScreen();
+}
+
+function factorialOf() {
+    let num = Number(screen.innerText);
+    let factorialnum = 1;
+    if(num >  0) {
+        for(let i = 1; i <= num; i++) {
+            factorialnum *= i;
+        }
+        screen.innerText = factorialnum;
+        displayValue = Number(screen.innerText);
+        updateScreen();
+  } else {
+    screen.innerText = 1;
+    displayValue = Number(screen.innerText);
+    updateScreen();
+  }
 }
 
 function hitEnter() {
