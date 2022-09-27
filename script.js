@@ -51,6 +51,7 @@ const percentage = document.querySelector("#percentage");
 const radical = document.querySelector("#radical");
 const power = document.querySelector("#power");
 const factorial = document.querySelector("#factorial");
+const screenUp = document.querySelector("#screenUp");
 
 //variables
 let displayValue = 0;
@@ -60,14 +61,14 @@ let clickedOperator = "";
 let prevOperator = "";
 
 clear.addEventListener("click", clearScreen);
-del.addEventListener("click", delScreen);
-enter.addEventListener("click", hitEnter);
-dot.addEventListener("click", addDot);
-plusMinus.addEventListener("click", changePlusMinus);
-percentage.addEventListener("click", addPercentage);
-radical.addEventListener("click", squareRoot);
-power.addEventListener("click", powerOfTwo);
-factorial.addEventListener("click", factorialOf);
+// del.addEventListener("click", delScreen);
+// enter.addEventListener("click", hitEnter);
+// dot.addEventListener("click", addDot);
+// plusMinus.addEventListener("click", changePlusMinus);
+// percentage.addEventListener("click", addPercentage);
+// radical.addEventListener("click", squareRoot);
+// power.addEventListener("click", powerOfTwo);
+// factorial.addEventListener("click", factorialOf);
 
 //functions
 function addDot() {
@@ -78,76 +79,102 @@ function addDot() {
 
 function clearScreen() {
     screen.innerText = 0;
-    displayValue = Number(screen.innerText);
+    getDisplayValue();
     displayValue = 0;
     firstValue = 0;
     secondValue = 0;
+    screenUp.innerText = "";
+    clickedOperator = "";
+    prevOperator = "";
+    del.addEventListener("click", delScreen);
+    enter.addEventListener("click", hitEnter);
+    dot.addEventListener("click", addDot);
+    plusMinus.addEventListener("click", changePlusMinus);
+    percentage.addEventListener("click", addPercentage);
+    radical.addEventListener("click", squareRoot);
+    power.addEventListener("click", powerOfTwo);
+    factorial.addEventListener("click", factorialOf);
 }
 
 function delScreen() {
     if(screen.innerText.length == 1){
         screen.innerText = 0;
-        displayValue = Number(screen.innerText);
+        screenUp.innerText = 0;
+        getDisplayValue();
     } else {
         let text = screen.innerText;
+        let text2 = screenUp.innerText;
         screen.innerText = text.substr(0, text.length - 1);
-        displayValue = Number(screen.innerText);
+        screenUp.innerText = text2.substr(0, text.length - 1);
+        getDisplayValue();
     }
 }
 
 function changePlusMinus() {
     screen.innerText *= -1;
-    displayValue = Number(screen.innerText);
+    getDisplayValue();
 }
 
 function addPercentage() {
     screen.innerText /= 100;
-    displayValue = Number(screen.innerText);
+    getDisplayValue();
     updateScreen();
 }
 
 function squareRoot() {
     screen.innerText = Math.sqrt(Number(screen.innerText));
-    displayValue = Number(screen.innerText);
+    getDisplayValue();
     updateScreen();
 }
 
 function powerOfTwo() {
     screen.innerText = Math.pow(Number(screen.innerText), 2);
-    displayValue = Number(screen.innerText);
+    getDisplayValue()
     updateScreen();
 }
 
 function factorialOf() {
     let num = Number(screen.innerText);
-    let factorialnum = 1;
-    if(num >  0) {
-        for(let i = 1; i <= num; i++) {
-            factorialnum *= i;
-        }
-        screen.innerText = factorialnum;
-        displayValue = Number(screen.innerText);
+    if(num > 15){
+        alert("max factorial 15 cause of big lags")
+        screen.innerText = 0;
+        getDisplayValue();
         updateScreen();
-  } else {
-    screen.innerText = 1;
-    displayValue = Number(screen.innerText);
-    updateScreen();
-  }
+    } else {
+        let factorialnum = 1;
+        if(num >  0) {
+            for(let i = 1; i <= num; i++) {
+                factorialnum *= i;
+            }
+            screen.innerText = factorialnum;
+            getDisplayValue();
+            updateScreen();
+      } else {
+        screen.innerText = 1;
+        getDisplayValue();
+        updateScreen();
+      }
+    }
 }
 
 function hitEnter() {
+    if(screen.innerText == "What?") {
+        clearScreen();
+    }
         secondValue = displayValue;
         if(!prevOperator){
             screen.innerText = displayValue;
         } else {
             screen.innerText = operate(prevOperator, firstValue, displayValue);
+            updateUpScreen(displayValue)
+            screenUp.innerHTML += ` ${prevOperator}&nbsp;`;
             if(screen.innerText == "What?"){
                 displayValue = 0;
                 firstValue = displayValue;
                 secondValue = 0;
                 clickedOperator = "";
             } else {
-                displayValue = Number(screen.innerText);
+                getDisplayValue();
                 firstValue = displayValue;
                 secondValue = 0;
                 clickedOperator = "";
@@ -156,24 +183,40 @@ function hitEnter() {
         }
 }
 
+
+
 function updateScreen() {
     if(screen.innerText.length > 13) {
-        screen.innerText = screen.innerText.substring(0, 13);
+        screen.innerText = screen.innerText.substring(0, 13);      
+
     }
 }
+
+function updateUpScreen(num) {
+    screenUp.innerText += num;
+}
+
+function getDisplayValue() {
+    displayValue = Number(screen.innerText);
+}
+
 
 
 //number buttons handling
 numbersBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
+        if(screen.innerText == "What?") {
+            clearScreen();
+        }
+
         updateScreen()
         if(screen.innerText === "0" || screen.innerText == "What?") {
             screen.innerText = "";
             screen.innerText += e.target.innerText;
-            displayValue = Number(screen.innerText);
+            getDisplayValue();
         } else {
             screen.innerText += e.target.innerText;
-            displayValue = Number(screen.innerText);
+            getDisplayValue();
         }
     })
 })
@@ -181,15 +224,23 @@ numbersBtn.forEach(btn => {
 //operator buttons handling
 operatorsBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
+        if(screen.innerText == "What?") {
+            clearScreen();
+        }
+
         if(firstValue == 0) {
             prevOperator = e.target.innerText;
             firstValue = displayValue;
+            updateUpScreen(firstValue);
+            screenUp.innerHTML += ` ${e.target.innerText}&nbsp;`;
             displayValue = 0;
         } else {
             clickedOperator = e.target.innerText;
             if(firstValue == displayValue) {
                 prevOperator = e.target.innerText;
                 firstValue = displayValue;
+                updateUpScreen(displayValue);
+                screenUp.innerHTML += ` ${e.target.innerText}&nbsp;`;
                 displayValue = 0;
             } else {
                 firstValue = operate(prevOperator, firstValue, displayValue);
@@ -197,7 +248,8 @@ operatorsBtn.forEach(btn => {
                     firstValue = 0;
                     displayValue = "error";
                 }
-
+                updateUpScreen(displayValue);
+                screenUp.innerHTML += ` ${e.target.innerText}&nbsp;`;
                 prevOperator = clickedOperator;
                 displayValue = 0;
             }
@@ -231,7 +283,7 @@ window.addEventListener("keydown", (e) => {
 
 //reset on load
 window.onload = function() {
-    screen.innerText = 0;
+    clearScreen()
 }
 window.onclick = () => {
     console.log(displayValue, firstValue, secondValue);
