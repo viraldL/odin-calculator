@@ -61,14 +61,14 @@ let clickedOperator = "";
 let prevOperator = "";
 
 clear.addEventListener("click", clearScreen);
-// del.addEventListener("click", delScreen);
-// enter.addEventListener("click", hitEnter);
-// dot.addEventListener("click", addDot);
-// plusMinus.addEventListener("click", changePlusMinus);
-// percentage.addEventListener("click", addPercentage);
-// radical.addEventListener("click", squareRoot);
-// power.addEventListener("click", powerOfTwo);
-// factorial.addEventListener("click", factorialOf);
+del.addEventListener("click", delScreen);
+enter.addEventListener("click", hitEnter);
+dot.addEventListener("click", addDot);
+plusMinus.addEventListener("click", changePlusMinus);
+percentage.addEventListener("click", addPercentage);
+radical.addEventListener("click", squareRoot);
+power.addEventListener("click", powerOfTwo);
+factorial.addEventListener("click", factorialOf);
 
 //functions
 function addDot() {
@@ -86,14 +86,6 @@ function clearScreen() {
     screenUp.innerText = "";
     clickedOperator = "";
     prevOperator = "";
-    del.addEventListener("click", delScreen);
-    enter.addEventListener("click", hitEnter);
-    dot.addEventListener("click", addDot);
-    plusMinus.addEventListener("click", changePlusMinus);
-    percentage.addEventListener("click", addPercentage);
-    radical.addEventListener("click", squareRoot);
-    power.addEventListener("click", powerOfTwo);
-    factorial.addEventListener("click", factorialOf);
 }
 
 function delScreen() {
@@ -246,7 +238,7 @@ operatorsBtn.forEach(btn => {
                 firstValue = operate(prevOperator, firstValue, displayValue);
                 if(typeof firstValue != "number"){
                     firstValue = 0;
-                    displayValue = "error";
+                    displayValue = 0;
                 }
                 updateUpScreen(displayValue);
                 screenUp.innerHTML += ` ${e.target.innerText}&nbsp;`;
