@@ -128,7 +128,7 @@ main {
 #del {grid-area: 1 / 4 / 2 / 6; color: #ee7878; background-color: rgba(238, 120, 120,0.1) !important;}
 #clear {grid-area: 1 / 1 / 2 / 2; background-color: rgba(163, 163, 163, 0.1); color: #ee7878; background-color: rgba(238, 120, 120,0.1) !important;}
 #dot { grid-area: 5 / 1 / 6 / 2; background-color: rgba(163, 163, 163, 0.1);}
-#enter { grid-area: 5 / 4 / 6 / 6; background-color:rgba(149, 119, 238, 0.1) !important; color: #b377ee;}
+#enter { grid-area: 5 / 4 / 6 / 6; background-color:rgba(149, 119, 238, 0.1) !important; color: #b377ee; font-weight: 800;}
 #plus { grid-area: 4 / 4 / 5 / 5; background-color: rgba(163, 163, 163, 0.1);}
 #minus { grid-area: 4 / 5 / 5 / 6; background-color: rgba(163, 163, 163, 0.1);}
 #multiple { grid-area: 3 / 4 / 4 / 5; background-color: rgba(163, 163, 163, 0.1);}
