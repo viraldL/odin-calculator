@@ -58,6 +58,7 @@ let firstValue = 0;
 let secondValue = 0;
 let clickedOperator = "";
 let prevOperator = "";
+let enterClicked = false;
 
 //btns
 clear.addEventListener("click", clearScreen);
@@ -86,6 +87,7 @@ function clearScreen() {
     screenUp.innerText = "";
     clickedOperator = "";
     prevOperator = "";
+    enterClicked = false;
 }
 
 function delScreen() {
@@ -149,6 +151,7 @@ function factorialOf() {
 }
 
 function hitEnter() {
+    enterClicked = true;
     if(screen.innerText == "What?") {
         clearScreen();
     }
@@ -158,8 +161,7 @@ function hitEnter() {
     } else {
         screen.innerText = operate(prevOperator, firstValue, displayValue);
         updateUpScreen(displayValue);
-        screenUp.innerHTML += ` ${prevOperator}&nbsp;`;
-        if(screen.innerText == "What?"){
+        if(screen.innerText == "What?" ){
             displayValue = 0;
             firstValue = displayValue;
             secondValue = 0;
@@ -169,9 +171,10 @@ function hitEnter() {
             firstValue = displayValue;
             secondValue = 0;
             clickedOperator = "";
+            prevOperator = "";
         }
-        updateScreen();
     }
+    updateScreen();
 }
 
 function updateScreen() {
@@ -191,6 +194,11 @@ function getDisplayValue() {
 //number buttons handling
 numbersBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
+        if(enterClicked){
+            screenUp.innerText = "";
+            firstValue = 0;
+            getDisplayValue();  
+        }
         if(screen.innerText == "What?") {
             clearScreen();
         }
@@ -209,6 +217,12 @@ numbersBtn.forEach(btn => {
 //operator buttons handling
 operatorsBtn.forEach(btn => {
     btn.addEventListener("click", (e) => {
+        if(enterClicked) {
+            screenUp.innerText = "";
+            displayValue = firstValue;
+            enterClicked = false;
+            getDisplayValue();  
+        }
         if(screen.innerText == "What?") {
             clearScreen();
         }
@@ -279,7 +293,7 @@ window.onload = function() {
     clearScreen()
 }
 
-// window.onclick = () => {
-//     console.log(displayValue, firstValue, secondValue);
-// }
+window.onclick = () => {
+    console.log(displayValue, firstValue, secondValue);
+}
 

@@ -1,7 +1,7 @@
 # odin-calculator
 My biggest project yet.
 Working caluclator!
-Fixed every bug that I encountered
+If you found any bugs, let me know!
 
 ### Functions
 - add
